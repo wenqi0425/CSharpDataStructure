@@ -1,10 +1,10 @@
-﻿using CRUDStaticArray;
+﻿using StaticArray;
 
 
 // CRUD Static Array
 
 // 插入
-MyArray arr = new MyArray(20);
+MyStaticArray arr = new MyStaticArray(20);   // 必须要大于10，否则会越界
 
 for (int i = 0; i < 10; i++)
 {
@@ -15,15 +15,15 @@ Console.Write(arr);   // 如果没有 ToString() --> DataStructure.Array1, 通�
 Console.WriteLine();
 
 arr.AddFirst(66);
-Console.Write(arr);  // Array1: count=11 capacity=20， [66, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Console.Write(arr);  // Array: count=11 capacity=20， [66, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 Console.WriteLine();
 
 arr.AddLast(88);
-Console.Write(arr);  // Array1: count=12 capacity=20 [66, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 88]
+Console.Write(arr);  // Array: count=12 capacity=20 [66, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 88]
 Console.WriteLine();
 
 arr.Add(2, 77);
-Console.Write(arr);  // Array1: count=13 capacity=20 [66, 0, 77, 1, 2, 3, 4, 5, 6, 7, 8, 9, 88]
+Console.Write(arr);  // Array: count=13 capacity=20 [66, 0, 77, 1, 2, 3, 4, 5, 6, 7, 8, 9, 88]
 Console.WriteLine();
 
 // 获取

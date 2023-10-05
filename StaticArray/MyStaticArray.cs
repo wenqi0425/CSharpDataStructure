@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CRUDStaticArray
+namespace StaticArray
 {
-    internal class MyArray
+    internal class MyStaticArray
     {
         private int[] data;    // 静态数组用于存储数据
         private int N;         // 记录动态数组实际存贮的元素数量
@@ -30,7 +30,7 @@ namespace CRUDStaticArray
 
         // 创建两个构造函数
         // 1）包含入口参数，容量可变
-        public MyArray(int capacity)
+        public MyStaticArray(int capacity)
         {
             data = new int[capacity];
             N = 0;
@@ -44,7 +44,7 @@ namespace CRUDStaticArray
             N = 0;
         }*/
 
-        public MyArray() : this(10) { } // 优雅的写法 this 
+        public MyStaticArray() : this(10) { } // 优雅的写法 this 
 
 
         // 添加元素 e，到指定位置 index
@@ -84,7 +84,7 @@ namespace CRUDStaticArray
             StringBuilder res = new StringBuilder();
 
             // string 的拼接
-            res.Append(string.Format("Array1: count={0} capacity={1}\n", N, data.Length));
+            res.Append(string.Format("Array: count={0} capacity={1}\n", N, data.Length));
             res.Append('[');
             for (int i = 0; i < N; i++)
             {
