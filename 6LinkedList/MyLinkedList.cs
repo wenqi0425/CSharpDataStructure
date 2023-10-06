@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -173,6 +174,75 @@ namespace _6LinkedList
             }
 
             return false;
+        }
+
+        // 删除
+        public E RemoveAt(int index)
+        {
+            if (index < 0 || index >= N)
+                throw new IndexOutOfRangeException("非法索引");
+
+            if(index == 0)
+            {
+                Node delNode = head;
+                head = head.next;
+                N--;
+                return delNode.e;
+            }
+            else
+            {
+                Node preIndex = head;
+                for(int i = 0; i< index-1; i++)
+                    preIndex = preIndex.next;
+
+                Node delNode = preIndex.next;
+                preIndex.next = delNode.next;
+                N--;
+                return delNode.e;
+            }
+        }
+
+        public E RemoveFirst()
+        {
+            return RemoveAt(0);
+        }
+
+        public E RemoveLast()
+        {
+            return RemoveAt(N-1);
+        }
+
+        public void Remove(E e)
+        {
+            if (head == null)
+                return;
+
+            if (head.e.Equals(e))
+            {
+                head = head.next;
+                N--;
+            }
+
+            else
+            {
+                Node current = head;
+                Node preIndex = null;
+
+                while(current != null)
+                {
+                    if (current.e.Equals(e))
+                        break;
+
+                    preIndex = current;
+                    current = current.next;
+                }
+
+                if (current != null)
+                {
+                    preIndex.next = preIndex.next.next;
+                    N--;
+                }
+            }
         }
     }
 }

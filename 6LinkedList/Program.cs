@@ -29,6 +29,13 @@
 
     private Node head；     // 链表的头节点的引用
 
+
+C# 提供了 链表类
+    1）LinkedList<>，是一个双向链表类。
+    2) LinkedListNode<>, 双向链表的节点类
+
+    双向链表 不常用。常用的是 单向链表。
+
  */
 
 using _6LinkedList;
@@ -59,6 +66,19 @@ Console.WriteLine();
 
 Console.WriteLine(linkedList.Contains(100));    // False
 Console.WriteLine(linkedList.Contains(1000));   // True
+Console.WriteLine();
+
+linkedList.RemoveAt(2);
+Console.WriteLine(linkedList);   // 4 -> 3 -> 2 -> 1 -> 0 -> 88 -> Null
+
+linkedList.RemoveFirst();
+Console.WriteLine(linkedList);   // 3 -> 2 -> 1 -> 0 -> 88 -> Null
+
+linkedList.RemoveLast();
+Console.WriteLine(linkedList);   // 3 -> 2 -> 1 -> 0 -> Null
+
+linkedList.Remove(0);
+Console.WriteLine(linkedList);   // 3 -> 2 -> 1 -> Null
 
 Console.Read();
 
