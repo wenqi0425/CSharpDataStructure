@@ -50,7 +50,7 @@ namespace _3DynamicArray
             return res.ToString();
         }
 
-        // 数组扩容
+        // 数组扩容: 其实是创建一个新的数组，将原来的数据复制进去，再把旧数组回收掉
         private void ResetCapacity(int newCapacity)
         {
             int[] newData = new int[newCapacity];
