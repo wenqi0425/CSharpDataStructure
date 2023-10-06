@@ -31,4 +31,37 @@
 
  */
 
+using _6LinkedList;
+
+MyLinkedList<int> linkedList = new MyLinkedList<int>();
+for (int i = 0;i<5; i++)
+{
+    linkedList.AddFirst(i);
+    Console.WriteLine(linkedList);  // 4 -> 3 -> 2 -> 1 -> 0 -> Null
+}
+
+Console.WriteLine();
+
+linkedList.AddLast(88);
+Console.WriteLine(linkedList);   // 4 -> 3 -> 2 -> 1 -> 0 -> 88 -> Null
+Console.WriteLine();
+
+linkedList.Add(2, 999);
+Console.WriteLine(linkedList);   // 4 -> 3 -> 999 -> 2 -> 1 -> 0 -> 88 -> Null
+Console.WriteLine();
+
+linkedList.Set(2, 1000);
+Console.WriteLine(linkedList);   // 4 -> 3 -> 1000 -> 2 -> 1 -> 0 -> 88 -> Null
+Console.WriteLine();
+
+Console.WriteLine(linkedList.Get(2));    // 1000
+Console.WriteLine();
+
+Console.WriteLine(linkedList.Contains(100));    // False
+Console.WriteLine(linkedList.Contains(1000));   // True
+
+Console.Read();
+
+
+
 

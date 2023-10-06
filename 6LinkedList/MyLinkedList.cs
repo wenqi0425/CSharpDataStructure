@@ -53,6 +53,22 @@ namespace _6LinkedList
             get { return N == 0; }
         }
 
+        // ToString() 打印输出
+        public override string ToString()
+        {
+            StringBuilder res = new StringBuilder();
+            Node current = head;
+            while (current != null)
+            { 
+                res.Append(current + " -> " );
+                current = current.next;
+            }
+            res.Append("Null");
+
+            return res.ToString();
+        }
+
+
         // 添加：
         public void Add(int index, E e)
         {
@@ -106,6 +122,57 @@ namespace _6LinkedList
         public void AddLast(E e)
         {
             Add(N, e);
+        }
+
+        // 查找
+        public E Get(int index)
+        {
+            if (index < 0 || index >= N)
+                throw new IndexOutOfRangeException("非法索引");
+
+            Node current = head;
+            for (int i = 0;i < index;i++)
+                current = current.next;
+
+            return current.e;
+        }
+        
+        public E GetFirst()
+        {
+            return Get(0);
+        }
+
+        public E GetLast()
+        {
+            return Get(N-1);
+        }
+
+        // 修改
+        public void Set(int index, E newE)
+        {
+            if (index < 0 || index >= N)
+                throw new IndexOutOfRangeException("非法索引");
+
+            Node current = head;
+            for (int i = 0; i < index; i++)
+                current = current.next;
+
+            current.e = newE;
+        }
+
+        // 查询
+        public bool Contains(E e)
+        {
+            Node current = head;
+            while(current != null)
+            {
+                if(current.e.Equals(e))
+                    return true;
+
+                current = current.next;
+            }
+
+            return false;
         }
     }
 }
