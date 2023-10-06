@@ -52,7 +52,60 @@ namespace _6LinkedList
         {
             get { return N == 0; }
         }
+
+        // 添加：
+        public void Add(int index, E e)
+        {
+            if(index<0 || index>N)
+                throw new IndexOutOfRangeException("非法索引");
+
+            // 1) 往链表的头部添加元素
+
+            if (index == 0)
+            {
+                /*
+                Node node = new Node(e);
+                node.next = head;
+                head = node;*/
+
+                // 优雅的写法
+                head = new Node(e, head);
+            }
+
+            // 2）往链表的中部 或 尾部 添加元素
+            else
+            {
+                // 插入数值到特定节点 index 时，需要先找到 它的前一个节点 preIndex，从头部开始找
+                Node preIndex = head;
+
+                // 找到 index 的前一个节点， index-1
+                for(int i = 0; i < index-1; i++)
+                    // 从头部开始查找，依次往后移动指针，直到找到 index 的前一个节点为止
+                    preIndex = preIndex.next;
+
+                /*
+                // 为 数值 e 创建一个新的节点 node
+                Node node = new Node(e);
+
+                // 将 node 和 preIndex 挂接
+                node.next = preIndex.next;
+                preIndex.next = node;*/
+
+                // 优雅的写法
+                preIndex.next = new Node(e, preIndex.next);
+            }
+
+            N++;
+        }
+
+        public void AddFirst(E e)
+        {
+            Add(0, e);
+        }
+
+        public void AddLast(E e)
+        {
+            Add(N, e);
+        }
     }
-
-
 }
