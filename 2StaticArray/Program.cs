@@ -1,6 +1,5 @@
 ﻿using _2StaticArray;
 
-
 // CRUD Static Array
 
 // 插入
