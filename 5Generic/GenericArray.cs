@@ -107,7 +107,7 @@ namespace _5Generic
             data[index] = newE;
         }
 
-        // 包含
+        // 搜索，包含
         public bool Contains(E e)
         {
             for (int i = 0; i < N; i++)
