@@ -1,4 +1,4 @@
-﻿using DynamicArray;
+﻿using _3DynamicArray;
 
 MyDynamicArray arr = new MyDynamicArray(10);
 

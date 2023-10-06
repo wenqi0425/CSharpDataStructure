@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _3DynamicArray
+namespace _5Generic
 {
-    internal class MyDynamicArray
+    // 定义一个 GenericArray<E>，操作一个未指定的数据类型 E
+    internal class GenericArray<E>   
     {
-        private int[] data;   
-        private int N;        
+        private E[] data;    
+        private int N;         
         public int Capacity     
         {
             get { return data.Length; }
@@ -20,20 +21,20 @@ namespace _3DynamicArray
             get { return N; }
         }
 
-        public bool IsEmpty    
+        public bool IsEmpty     
         {
             get { return N == 0; }
         }
 
-        public MyDynamicArray(int capacity)
+        public GenericArray(int capacity)
         {
-            data = new int[capacity];
+            data = new E[capacity];
             N = 0;
         }
 
-        public MyDynamicArray() : this(10) { }
+        public GenericArray() : this(10) { }
 
-        // 打印  ToString()，遍历元素数值，将其转变为 string，再拼接起来，否则打印不出具体的数值。
+        // 打印  ToString()
         public override string ToString()
         {
             StringBuilder res = new StringBuilder();
@@ -50,25 +51,14 @@ namespace _3DynamicArray
             return res.ToString();
         }
 
-        // 数组扩容
-        private void ResetCapacity(int newCapacity)
-        {
-            int[] newData = new int[newCapacity];
-            for (int i = 0; i < N; i++)
-                newData[i] = data[i];
-
-            data = newData;
-        }
-
-        // CRUD，Add()要做扩容处理，Remove()要做容量判断，再决定要不要缩容，以避免空间浪费
-        // 增加
-        public void Add(int index, int e)
+        // 添加
+        public void Add(int index, E e)
         {
             if (index < 0 || index > N)
                 throw new ArgumentException("数组索引越界");
 
             if (N == data.Length)
-                ResetCapacity(2*data.Length);    // 容量不足时自动扩容为之前的两倍
+                throw new ArgumentException("数组已满");
 
             for (int i = N - 1; i >= index; i--)  
             {
@@ -79,18 +69,18 @@ namespace _3DynamicArray
             N++;                 
         }
 
-        public void AddLast(int e)
+        public void AddLast(E e)
         {
             Add(N, e);
         }
 
-        public void AddFirst(int e)
+        public void AddFirst(E e)
         {
             Add(0, e);
         }
 
         // 获取
-        public int Get(int index)
+        public E Get(int index)
         {
             if (index < 0 || index > N)
                 throw new ArgumentException("数组索引越界");
@@ -98,18 +88,18 @@ namespace _3DynamicArray
             return data[index];
         }
 
-        public int GetFirst()
+        public E GetFirst()
         {
             return Get(0);
         }
 
-        public int GetLast()
+        public E GetLast()
         {
             return Get(N - 1);
         }
 
         // 修改
-        public void Set(int index, int newE)
+        public void Set(int index, E newE)
         {
             if (index < 0 || index > N)
                 throw new ArgumentException("数组索引越界");
@@ -117,35 +107,39 @@ namespace _3DynamicArray
             data[index] = newE;
         }
 
-        // 搜索，包含
-        public bool Contains(int e)
+        // 包含
+        public bool Contains(E e)
         {
             for (int i = 0; i < N; i++)
             {
-                if (data[i] == e)
+                if (data[i].Equals(e))   // 两个引用类型的比较，是比较它们的内存地址，用 Equals
                     return true;
             }
             return false;
         }
 
-        public int IndexOf(int e)
+        // 某个元素的 index
+        public int IndexOf(E e)
         {
             for (int i = 0; i < N; i++)
             {
-                if (data[i] == e)
+                if (data[i].Equals(e))
                     return i;
             }
-            return -1;   
+            return -1;   // 小于 0 的 数值，都可以作为无效的 index
         }
 
         // 删除
-        public int RemoveAt(int index)
+        public E RemoveAt(int index)
         {
+            // 索引检查
             if (index < 0 || index > N)
                 throw new ArgumentException("数组索引越界");
 
-            int del = data[index];
+            // 保存要删除的元素
+            E del = data[index];
 
+            // 删除逻辑
             for (int i = index + 1; i < N; i++)
             {
                 data[i - 1] = data[i];
@@ -153,33 +147,39 @@ namespace _3DynamicArray
 
             N--;
 
-            data[N] = default(int);
-
-            // 数组缩容，如果元素数量为数组长度的1/4，就缩容一半，避免空间浪费，因为实在用不了那么多。
-            // 不选 1/2，因为当数组首次扩容，再删除这个数据，会触发缩容扩容操作各一次，如果频繁进行这一个数据的添加删除，会影响性能。
-            if (N == data.Length / 4)      
-                ResetCapacity(data.Length / 2);  
+            // 回收 data[N]
+            data[N] = default(E);
 
             return del;
         }
 
-        public int RemoveFirst()
+        public E RemoveFirst()
         {
             return RemoveAt(0); ;
         }
 
-        public int RemoveLast()
+        public E RemoveLast()
         {
             return RemoveAt(N - 1);
         }
 
-        public void RemoveE(int e)
+        public void RemoveE(E e)
         {
             int index = IndexOf(e);
             if (index != -1)
             {
                 RemoveAt(index);
             }
+        }
+
+        // 数组扩容
+        private void ResetCapacity(int newCapacity)
+        {
+            E[] newData = new E[newCapacity];
+            for (int i = 0; i < N; i++)
+                newData[i] = data[i];
+
+            data = newData;
         }
     }
 }
